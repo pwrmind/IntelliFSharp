@@ -64,6 +64,9 @@ class Program
             }
         };
 
+        fsiProc.StandardInput.WriteLine("#reset;;");
+        await Task.Delay(500); // Дать время на сброс
+
         fsiProc.OutputDataReceived += outputHandler;
         fsiProc.ErrorDataReceived += errorHandler;
 
@@ -142,6 +145,9 @@ class Program
 
     static async Task Main(string[] args)
     {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
         using var fsi = StartFSI();
         const string modelName = "deepseek-coder-v2:latest";
         const int maxAttempts = 3;
